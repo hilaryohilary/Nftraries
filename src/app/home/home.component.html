@@ -1,0 +1,19 @@
+<h2 *ngIf="connect() == false" class='connectwallet'> please connect to bsc wallet</h2>
+<h2 *ngIf="connect() == true" class="newdrops"> New Drops</h2>
+<div>
+  <mat-grid-list cols="4">
+    <mat-grid-tile *ngFor="let drop of drops">
+      <mat-card class="drop-card">
+        <mat-card-title-group></mat-card-title-group>
+        <img mat-card-image [src]="drop.imageUri">
+        <mat-card-header>
+          <mat-card-title>{{drop.name}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-card-subtitle>{{drop.description}}</mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+</div>
