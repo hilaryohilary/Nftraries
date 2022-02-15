@@ -1,3 +1,55 @@
-<p>addnewdrop works!</p>
 
-<h5>hello from this place</h5>
+<form (ngSubmit)="submitForm()" [formGroup]="newDrop">
+  <mat-form-field appearance="fill">
+    <mat-label>Project Name</mat-label>
+    <input matInput class="input" formControlName="projectName" required>
+    <mat-error *ngIf="newDrop.get('projectName')?.errors?.required">Please provide your project name</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Project Decription</mat-label>
+    <textarea matInput minlength="30" maxlength="200" formControlName="projectDescription" required></textarea>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Website Url</mat-label>
+    <input matInput class="input" placeholder="https://example.com" formControlName="websiteUrl" required>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Twitter Url</mat-label>
+    <input matInput class="input" placeholder="https://twitter.com/example" formControlName="twitterUrl" required>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Discord Url</mat-label>
+    <input matInput class="input" formControlName="discordUrl" required>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Image Url</mat-label>
+    <input matInput class="input" formControlName="imageUrl" required>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Presale Date</mat-label>
+    <input matInput class="input" type="date" formControlName="presaleDate" required>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Launch Date</mat-label>
+    <input matInput type="date" class="input" formControlName="launchDate" required>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Price</mat-label>
+    <input matInput class="input" formControlName="price" required>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Total Supply</mat-label>
+    <input matInput type="number" class="input" formControlName="totalSupply" required>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Select Chain</mat-label>
+    <mat-select required formControlName="chain">
+      <mat-option value="1">Ethereum</mat-option>
+      <mat-option value="2">Binance Smart Chain</mat-option>
+      <mat-option value="3">Polygon</mat-option>
+      <mat-option value="4">Tron</mat-option>
+      <mat-option value="5">Solana</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<button mat-stroked-button color="basic" [disabled]="!newDrop.valid">Submit Project</button>

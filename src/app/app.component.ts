@@ -33,6 +33,7 @@ export class AppComponent implements OnInit{
     let chainId = await this.web3.eth.getChainId();
     if( chainId !== 97) {
       alert("please connect to bsc testnet");
+      this.dappService.connected = false;
       return;
     }
     else {

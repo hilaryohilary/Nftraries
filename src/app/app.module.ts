@@ -14,16 +14,18 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
-import WalletLink, { WalletLinkProvider } from 'walletlink';
-import { FormsModule } from '@angular/forms';
+import WalletLink from 'walletlink';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AddnewdropComponent } from './addnewdrop/addnewdrop.component';
 import { DropComponent } from './drop/drop.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-
 
 
 const providerOptions = {
@@ -48,7 +50,7 @@ const providerOptions = {
     AddnewdropComponent,
     DropComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,10 +62,13 @@ const providerOptions = {
     MatCardModule,
     MatSidenavModule,
     MatGridListModule,
-    FormsModule,
+    ReactiveFormsModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
   ],
   entryComponents: [Web3ModalComponent],
   providers: [{
