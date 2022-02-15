@@ -9,38 +9,47 @@
     <mat-form-field appearance="fill">
       <mat-label>Project Decription</mat-label>
       <textarea matInput minlength="30" maxlength="200" formControlName="projectDescription" required></textarea>
+      <mat-error>Please add a brief description of about 30 characters and maximum of 200 characters</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Website Url</mat-label>
-      <input matInput class="input" placeholder="https://example.com" formControlName="websiteUrl" required>
+      <input matInput class="input" placeholder="https://example.com" type="url" pattern="https://.*" formControlName="websiteUrl" required>
+      <mat-error>Please add a valid website url</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Twitter Url</mat-label>
-      <input matInput class="input" placeholder="https://twitter.com/example" formControlName="twitterUrl" required>
+      <input matInput class="input" placeholder="https://twitter.com/example" type="url" pattern="https://twitter.com/.*" formControlName="twitterUrl" required>
+      <mat-error>Please add a valid twitter url</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label>Discord Url</mat-label>
-      <input matInput class="input" formControlName="discordUrl" required>
+      <mat-label>Discord Channel</mat-label>
+      <input matInput class="input" formControlName="discordUrl" type="url" required>
+      <mat-error>Please input a valid discord channel url</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Image Url</mat-label>
-      <input matInput class="input" formControlName="imageUrl" required>
+      <input matInput class="input" formControlName="imageUrl" type="url" pattern="(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)" required>
+      <mat-error>Please enter a valid image url</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Presale Date</mat-label>
       <input matInput class="input" type="date" formControlName="presaleDate" required>
+      <mat-error>Must select a valid date</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Launch Date</mat-label>
       <input matInput type="date" class="input" formControlName="launchDate" required>
+      <mat-error>Please enter your date of launch</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Price</mat-label>
-      <input matInput class="input" formControlName="price" required>
+      <input matInput class="input" type="number" formControlName="price" required>
+      <mat-error>Please enter a valid price</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Total Supply</mat-label>
       <input matInput type="number" class="input" formControlName="totalSupply" required>
+      <mat-error>Please enter the total supply of your NFT collection</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Select Chain</mat-label>
@@ -50,9 +59,11 @@
         <mat-option value="3">Polygon</mat-option>
         <mat-option value="4">Tron</mat-option>
         <mat-option value="5">Solana</mat-option>
+        <mat-error>Please a valid option</mat-error>
       </mat-select>
     </mat-form-field>
     <button mat-raised-button color="primary" [disabled]="!newDrop.valid">Submit Project</button>
   </div>
 </form>
 
+<p>{{newDrop.value | json}}</p>
