@@ -20,7 +20,8 @@ export class DappService {
           package: WalletConnectProvider,
           options: {
             appName: "nftraries",
-            infuraId: "2098fc00d6de4bc494cc0adac897d2b5"
+            infuraId: "2098fc00d6de4bc494cc0adac897d2b5",
+            infuraUrl: "https://mainnet.infura.io/v3/2098fc00d6de4bc494cc0adac897d2b5",
           },
         },
         walletlink: {
