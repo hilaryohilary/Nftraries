@@ -1,9 +1,21 @@
-:host {
-  display: flex;
-  flex-direction: column;
-  margin: 2rem auto;
-  max-width: 600px;
 
+div {
+  max-width: 500px;
+  margin: 2rem auto;
 }
 
+mat-form-field {
+  width: 500px;
+  margin-top: 1rem;
+}
 
+@media screen and (max-width: 400px) {
+
+  div {
+    width: 300px;
+  }
+
+  mat-form-field {
+    width: 300px;
+  }
+}
