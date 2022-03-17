@@ -1,46 +1,52 @@
 
-<form (ngSubmit)="submitForm()" [formGroup]="newDrop">
+<form (ngSubmit)="submitDrop()" [formGroup]="newDrop">
   <div>
     <mat-form-field appearance="fill">
       <mat-label>Project Name</mat-label>
-      <input matInput class="input" formControlName="projectName" required>
-      <mat-error>Please provide your project name</mat-error>
+      <input matInput class="input" formControlName="projectName" >
+      <mat-error *ngIf="newDrop.get('projectName')?.dirty">{{projectNameErrorMessage}}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Project Decription</mat-label>
-      <textarea matInput minlength="30" maxlength="200" formControlName="projectDescription" required></textarea>
+      <textarea matInput formControlName="projectDescription"></textarea>
       <mat-error>Please add a brief description of about 30 characters and maximum of 200 characters</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Website Url</mat-label>
-      <input matInput class="input" placeholder="https://example.com" type="url" pattern="https://.*" formControlName="websiteUrl" required>
+      <input matInput class="input" placeholder="https://example.com" type="url" formControlName="websiteUrl">
       <mat-error>Please add a valid website url</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Twitter Url</mat-label>
-      <input matInput class="input" placeholder="https://twitter.com/example" type="url" pattern="https://twitter.com/.*" formControlName="twitterUrl" required>
+      <input matInput class="input" placeholder="https://twitter.com/example" type="url" formControlName="twitterUrl">
       <mat-error>Please add a valid twitter url</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Discord Channel</mat-label>
-      <input matInput class="input" formControlName="discordUrl" type="url" required>
+      <input matInput class="input" formControlName="discordUrl" type="url">
       <mat-error>Please input a valid discord channel url</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Image Url</mat-label>
-      <input matInput class="input" formControlName="imageUrl" type="url" pattern="(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)" required>
+      <input matInput class="input" formControlName="imageUrl" type="url" pattern="(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)">
       <mat-error>Please enter a valid image url</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Presale Date</mat-label>
-      <input matInput class="input" type="date" formControlName="presaleDate" required>
+      <input matInput class="input" formControlName="presaleDate" [matDatepicker]="secondpicker">
+      <mat-datepicker-toggle matSuffix [for]="secondpicker"></mat-datepicker-toggle>
+      <mat-datepicker #secondpicker></mat-datepicker>
       <mat-error>Must select a valid date</mat-error>
     </mat-form-field>
+
     <mat-form-field appearance="fill">
       <mat-label>Launch Date</mat-label>
-      <input matInput type="date" class="input" formControlName="launchDate" required>
-      <mat-error>Please enter your date of launch</mat-error>
+      <input matInput class="input" formControlName="launchDate" [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error>Must select a valid date for your launch</mat-error>
     </mat-form-field>
+
     <mat-form-field appearance="fill">
       <mat-label>Price</mat-label>
       <input matInput class="input" type="number" formControlName="price" required>
@@ -48,22 +54,23 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Total Supply</mat-label>
-      <input matInput type="number" class="input" formControlName="totalSupply" required>
+      <input matInput type="number" class="input" formControlName="totalSupply">
       <mat-error>Please enter the total supply of your NFT collection</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Select Chain</mat-label>
-      <mat-select required formControlName="chain">
+      <mat-select formControlName="chain">
         <mat-option value="1">Ethereum</mat-option>
-        <mat-option value="2">Binance Smart Chain</mat-option>
-        <mat-option value="3">Polygon</mat-option>
+        <mat-option value="56">Binance Smart Chain</mat-option>
+        <mat-option value="137">Polygon</mat-option>
         <mat-option value="4">Tron</mat-option>
         <mat-option value="5">Solana</mat-option>
         <mat-error>Please a valid option</mat-error>
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button color="primary" [disabled]="!newDrop.valid">Submit Project</button>
+    <button mat-raised-button color="primary" [disabled]="!newDrop.valid" (click)="submitDrop()">Submit Project</button>
   </div>
 </form>
 
 <p>{{newDrop.value | json}}</p>
+<p>{{ (newDrop.get('launchDate')?.value) | json }}</p>

@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Web3ModalService } from '@mindsorg/web3modal-angular';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import WalletLink, { WalletLinkProvider } from 'walletlink';
 import Web3 from 'web3';
+
+import contractAddress from '../app/contract';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,12 @@ import Web3 from 'web3';
 export class DappService {
   provider:any;
   connected:boolean = false;
-  constructor (private web3ModalService:Web3ModalService) {}
+  dappService: any;
+  drops: any;
+  private web3: any;
+  account: any;
+
+  constructor (private web3ModalService:Web3ModalService, private snackBar: MatSnackBar) {}
   async loadModal() {
     this.web3ModalService.setConfiguration({
       disableInjectedProvider: false,
@@ -59,4 +67,55 @@ export class DappService {
 
 }
 
-}
+  async submitDrop(
+     imageUri: string,
+         name: string,
+         description: string,
+         social_1: string,
+         social_2: string,
+         websiteUri: string,
+         price: string,
+         supply: number,
+         presale: number,
+         sale: number,
+         chain: number
+  ) {
+
+    if (this.connected !== true) {
+      alert('Connect to bsc testnet');
+    }
+    else {
+        try {
+          this.web3 = new Web3(this.provider);
+          console.log(imageUri, name, description,social_1, social_2, websiteUri, price, supply, presale, sale, chain, this.account);
+
+          const contract = new this.web3.eth.Contract(contractAddress.abi, contractAddress.contractAddress);
+          await contract.methods.addDrop({
+            imageUri,
+            name,
+            description,
+            social_1,
+            social_2,
+            websiteUri,
+            price,
+            supply,
+            presale,
+            sale,
+            chain
+          }).send({from: this.account}).then((result: any) => {
+            this.snackBar.open('Form successfully submitted.', '', {
+              panelClass: ['snackbar-success']
+            });
+            console.log(result);
+          });
+
+        }
+        catch(error) {
+          console.log(error);
+          this.snackBar.open('Something went wrong.', '', {
+            panelClass: ['snackbar-error']
+          });
+        }
+      }
+    }
+  }

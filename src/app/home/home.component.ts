@@ -11,8 +11,8 @@ import { Drops } from '../drops';
 
 export class HomeComponent implements OnInit {
 
-  
-  connected: boolean = true;
+
+  connected: boolean = false;
   drops: Drops[] = [];
   private web3: any;
   constructor(private dappService: DappService) { }
