@@ -6,6 +6,7 @@ import WalletLink, { WalletLinkProvider } from 'walletlink';
 import Web3 from 'web3';
 
 import contractAddress from '../app/contract';
+import { Drops } from './drops';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class DappService {
   provider:any;
   connected:boolean = false;
   dappService: any;
-  drops: any;
+  drops: Drops[] = [];
   private web3: any;
   account: any;
 
@@ -67,6 +68,24 @@ export class DappService {
 
 }
 
+  async loadContract(){
+    if(this.connected == true) {
+      try {
+        this.web3 = new Web3(this.provider);
+        const contract = new this.web3.eth.Contract(contractAddress.abi, contractAddress.contractAddress);
+        this.drops = await contract.methods.getDrops().call();
+      }
+      catch(err) {
+        console.log(err);
+      }
+    }
+    return this.drops;
+  }
+
+  async getDrop(drop: string) {
+    return this.drops.filter(d => drop === d.name);
+  }
+
   async submitDrop(
      imageUri: string,
          name: string,
@@ -87,8 +106,6 @@ export class DappService {
     else {
         try {
           this.web3 = new Web3(this.provider);
-          console.log(imageUri, name, description,social_1, social_2, websiteUri, price, supply, presale, sale, chain, this.account);
-
           const contract = new this.web3.eth.Contract(contractAddress.abi, contractAddress.contractAddress);
           await contract.methods.addDrop({
             imageUri,

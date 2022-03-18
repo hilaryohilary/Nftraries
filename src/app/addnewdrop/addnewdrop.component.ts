@@ -51,7 +51,7 @@ export class AddnewdropComponent implements OnInit {
     const twitter = this.get('twitterUrl');
     const discord = this.get('discordUrl');
     const website = this.get('websiteUrl');
-    const price = this.get('price');
+    let price = this.get('price');
     const supply = this.get('totalSupply');
     let presale = this.get('presaleDate');
     let sale = this.get('launchDate');
@@ -59,15 +59,14 @@ export class AddnewdropComponent implements OnInit {
 
     presale = new Date(presale).getTime();
     sale = new Date(sale).getTime();
-    console.log(presale, sale);
+    price = price.toString();
+    try  {
+      await this.dappService.submitDrop(imageValue, name, description, twitter,discord, website, price, supply, presale, sale, chain)
+    }
 
-    // try  {
-    //   await this.dappService.submitDrop(imageValue, name, description, twitter,discord, website, price, supply, presale, sale, chain)
-    // }
-
-    // catch(error) {
-    //  console.log(error);
-    // }
+    catch(error) {
+     console.log(error);
+    }
   }
 
 

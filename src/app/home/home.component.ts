@@ -22,24 +22,11 @@ export class HomeComponent implements OnInit {
     return this.connected;
   }
 
-
-
   async loadContract() {
-    if(this.connected == true) {
-      try {
-        this.web3 = new Web3(this.dappService.provider);
-        console.log(this.web3);
-        const contract = new this.web3.eth.Contract(contractAddress.abi, contractAddress.contractAddress);
-      this.drops = await contract.methods.getDrops().call();
-    }
-    catch(err) {
-      console.log(err);
-    }
-    }
-    return this.drops;
+    this.drops = await this.dappService.loadContract();
   }
 
   async ngOnInit() {
-    setInterval(()=> {this.loadContract()}, 1000);
+    setInterval(()=> {this.loadContract()}, 5000);
   }
 }

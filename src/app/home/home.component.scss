@@ -4,6 +4,7 @@
 
 .newdrops {
   text-align: center;
+  margin: 4rem;
 }
 
 div {
@@ -13,4 +14,14 @@ div {
 .drop-card {
    width: 250px;
    margin-right: 10px;
+   margin-bottom: 4rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  overflow: hidden;
+  height: 250px !important;
 }

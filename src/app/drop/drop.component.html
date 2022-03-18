@@ -1,6 +1,54 @@
+
 <div>
-  <p>drop works!</p>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
+  <img [src]="this.drop[0].imageUri" alt="">
+  <h1>{{ this.drop[0].name }}</h1>
+  <h3>{{ this.drop[0].description }}</h3>
+  <ul>
+    <li>Twitter : {{ this.drop[0].social_1 }}</li>
+    <li> Discord link: {{ this.drop[0].social_2 }}</li>
+    <li>Website: {{ this.drop[0].websiteUri }}</li>
+    <li [ngSwitch]="this.drop[0].chain">Price: {{ this.drop[0].price }}
+    <span *ngSwitchCase=4>
+      TRX
+    </span>
+    <span *ngSwitchCase=56>
+      BSC
+    </span>
+    <span *ngSwitchCase=137>
+      MATIC
+    </span>
+    <span *ngSwitchCase=5>
+      SOL
+    </span>
+    <span *ngSwitchCase=1>
+      ETH
+    </span>
+    <span *ngSwitchDefault>
+      ETH
+    </span>
+  </li>
+    <li> Total Supply: {{  this.drop[0].supply }}</li>
+    <li>Presale Date: {{ this.drop[0].presale | date }}</li>
+    <li>Launch Date: {{this.drop[0].sale | date }}</li>
+    <li [ngSwitch]="this.drop[0].chain">
+    <p *ngSwitchCase= 5>
+      Solana
+    </p>
+    <p *ngSwitchCase=56>
+      Binance Smart Chain
+    </p>
+    <p *ngSwitchCase=4>
+      Tron
+    </p>
+    <p *ngSwitchCase=137>
+      Polygon
+    </p>
+    <p *ngSwitchCase=1>
+      Ethereum
+    </p>
+    <p *ngSwitchDefault>
+      Ethereum
+    </p>
+    </li>
+  </ul>
 </div>
